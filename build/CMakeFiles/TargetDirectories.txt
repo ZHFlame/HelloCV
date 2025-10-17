@@ -1,0 +1,3 @@
+/home/lychee/HelloCV/build/CMakeFiles/HelloCV.dir
+/home/lychee/HelloCV/build/CMakeFiles/edit_cache.dir
+/home/lychee/HelloCV/build/CMakeFiles/rebuild_cache.dir
