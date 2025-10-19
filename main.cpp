@@ -5,16 +5,40 @@ class Crypto {
     public:
         int key;
         string plaintext;
-        string Encrypt(string plaintext) const {
-            for (int i=0;i<plaintext.length();i++) {
-                if (plaintext[i]>='A'&&plaintext[i]<='z') plaintext[i]+=key;
+    //优化加密逻辑，大小写单独加密，并解决出现非字母符号问题
+        string Encrypt(string plaintext) {
+            key=(key%26+26)%26;//限定key范围1-25且为正
+            /*for (int i=0;i<plaintext.length();i++) {
+                if (plaintext[i]>='A'&&plaintext[i]<='Z') {
+                    if ((plaintext[i]+=key) > 'Z') plaintext[i]-=26;
+                }else if (plaintext[i]>='a'&&plaintext[i]<='z') {
+                    if ((plaintext[i]+=key) > 'z') plaintext[i]-=26;
+                }
+            }*/
+            for (char &ch : plaintext) {
+                if (ch >= 'A' && ch <= 'Z') {
+                    ch = 'A' + ((ch - 'A' + key) % 26+26)%26;//这样写就不会出现越界的问题,对26取余保证是正数
+                } else if (ch >= 'a' && ch <= 'z') {
+                    ch = 'a' + ((ch - 'a' + key) % 26+26)%26;
+                }
             }
             return plaintext;
         }
-        string Decrypt(string plaintext) const {
-
-            for (int i=0;i<plaintext.length();i++) {
-                if (plaintext[i]>='A'&&plaintext[i]<='z') plaintext[i]-=key;
+        string Decrypt(string plaintext) {
+            key=(key%26+26)%26;//限定key范围1-25且为正
+            /*for (int i=0;i<plaintext.length();i++) {
+                if (plaintext[i]>='A'&&plaintext[i]<='Z') {
+                    if ((plaintext[i]-=key) < 'A') plaintext[i]+=26;
+                }else if (plaintext[i]>='a'&&plaintext[i]<='z') {
+                    if ((plaintext[i]-=key) < 'a') plaintext[i]+=26;
+                }
+            }*/
+            for (char &ch : plaintext) {
+                if (ch>='A' && ch<='Z') {
+                    ch = 'A' + ((ch - 'A' - key)%26+26)%26;
+                } else if (ch>='a' && ch <='z') {
+                    ch = 'a' + ((ch - 'a' - key)%26+26)%26;
+                }
             }
             return plaintext;
         }
@@ -23,16 +47,23 @@ class FileHandler {
 public:
     string file;
     string readFile() {
-        string filecontent;
+        //string filecontent;
         ifstream infile;
         infile.open(file);
-        infile>>filecontent;
+        //infile>>filecontent;
+        if (!infile) return {};
+        string filecontent, line;
+        while (getline(infile, line)) {//依然使用getline
+            filecontent += line + '\n'; // 保留换行符
+        }
         return filecontent;
     }
     void writeFile(string filecontent) {
         ofstream outfile;
         outfile.open(file);
         outfile<<filecontent;
+        outfile.flush();
+        outfile.close();
     }
 };
 class Menu {
