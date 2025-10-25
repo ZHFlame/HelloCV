@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/HelloCV.dir/main.cpp.o"
   "CMakeFiles/HelloCV.dir/main.cpp.o.d"
-  "CryptoTool"
-  "CryptoTool.pdb"
+  "TrafficLight_Detect"
+  "TrafficLight_Detect.pdb"
 )
 
 # Per-language clean rules from dependency scanning.
