@@ -5,3 +5,5 @@
 4. https://www.yuque.com/lychee-v5elp/ophep5/vnlgygvto6vs3vmu?singleDoc# 《四、Docker学习笔记》  
 5. https://www.yuque.com/lychee-v5elp/ophep5/mmu0g60fa0ep056p?singleDoc# 《五、CMake学习笔记》  
 6. https://www.yuque.com/lychee-v5elp/ophep5/og7us60nykg86tlb?singleDoc# 《六、实践：简易文本加解密程序》
+7. https://www.yuque.com/lychee-v5elp/ophep5/dgias3gqcg4ke77q?singleDoc# 《七、OpenCV学习笔记》
+8. https://www.yuque.com/lychee-v5elp/ophep5/wwzro33oa0mgddr7?singleDoc# 《八、OpenCV实践笔记》
