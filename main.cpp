@@ -71,12 +71,20 @@ Mat preProcess(Mat imgRaw) {//图像预处理函数
     return imgProcessed;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     Mat img;//视频的每一帧转换为的原图存储
     VideoCapture cap;//视频捕获器
     Mat imgHSV;//存储HSV色彩空间图样
     //使用视频捕获器读取视频
-    string path = "TrafficLight.mp4";
+
+    //根据程序运行时提供的参数定义Path
+    string path;
+    if (argc == 1) path = "TrafficLight.mp4";
+    else if (argc ==2) path = argv[1];
+    else {
+        cout<<"提供过多参数！"<<endl;
+        return -1;
+    };
     if (!cap.open(path)) {
         cout << "无法打开视频文件: " << path << endl;
         return -1;
@@ -109,9 +117,18 @@ int main() {
     Scalar lGreen(34, 50, 87);
     Scalar uGreen(104, 255, 255);
 
-
+    //程序提示
+    cout<<"正在输出，请勿关闭程序，等待输出完成通知！"<<endl;
+    //定义旋转图标
+    const char spinChars[] = {'|', '/', '-', '\\'};
+    int index = 0;
+    cout<<"程序运行状态：";
     //逐帧写入到img中，并进行处理
     while (true) {
+        //旋转图标
+        cout << "\b" << spinChars[index] << flush; // 回退、刷新输出流
+        index = (index + 1) % 4;
+
         if (!cap.read(img) || img.empty()) break;// 读取失败或到达文件末尾，退出循环
 
         cvtColor(img,imgHSV,COLOR_BGR2HSV);
@@ -141,18 +158,19 @@ int main() {
         //下面是显示区
         //imshow("redMask",redMask);
         //imshow("greenMask",greenMask);
-        imshow("OutputVideo_img",img);
+        //imshow("OutputVideo_img",img);
         //imshow("OutputVideo_HSV",imgHSV);
 
         // 延时+ESC 键退出
-        int key = waitKey(1);
+        /*int key = waitKey(1);
         if (key == 27) {
             break;
-        }
+        }*/
 
     }
 
     //后续处理
+    cout<<endl<<"输出完成！文件名称：result.avi"<<endl;
     cap.release();
     destroyAllWindows();
     writer.release();
