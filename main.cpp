@@ -19,8 +19,8 @@ using namespace cv;
     /**以上为HoughCircles函数法检测圆，已弃用！**/
 int detCircle(Mat img,Mat imgModel) {
     //使用轮廓检测方法进行圆形的检测
-    vector<std::vector<cv::Point>> contours;
-    vector<cv::Vec4i> hierarchy;
+    vector<vector<Point>> contours;
+    vector<Vec4i> hierarchy;
     vector<Vec3f> Circles;//存储检测出来的圆形，同样是包含(x, y, radius)三个值。
     findContours(img,contours,hierarchy,RETR_EXTERNAL,CHAIN_APPROX_SIMPLE);
     //drawContours(imgModel,contours,-1,Scalar(255,0,255),10);
