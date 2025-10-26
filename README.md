@@ -105,12 +105,21 @@ make
 ## 使用方法
 
 ### 运行程序
+1. **[方式1]** 默认将同目录下 `TrafficLight.mp4` 作为操作对象：
 将待检测视频更名为 `TrafficLight.mp4` 放到执行目录（build目录）中。
 在 build 目录中执行：
 ```bash
 ./TrafficLight_Detect
 ```
 最终输出为同目录下的 `result.avi` 文件
+
+2. **[方式2]** 将待操作视频放到执行目录（build目录）中。
+   在 build 目录中执行：
+```bash
+./TrafficLight_Detect [待处理文件名]
+```
+最终输出为同目录下的 `result.avi` 文件
+
 
 ## 故障排除
 
